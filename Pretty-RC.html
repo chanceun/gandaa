@@ -1,0 +1,332 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For pretty RC 💕</title>
+  <!-- Google Fonts for cute typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --hk-pink-bg: #ffeef2;
+      --hk-card-bg: #ffffff;
+      --hk-primary-pink: #ff85a1;
+      --hk-dark-pink: #ff477e;
+      --hk-red: #ff0a54;
+      --hk-soft-red: #ff5c8a;
+      --hk-border-pink: #fbb1bd;
+    }
+
+    body {
+      background-color: var(--hk-pink-bg);
+      /* Subtle Hello Kitty style polka-dot pattern */
+      background-image: 
+        radial-gradient(rgba(255, 133, 161, 0.25) 2px, transparent 2.5px),
+        radial-gradient(rgba(255, 133, 161, 0.25) 2px, #ffeef2 2.5px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      font-family: 'Quicksand', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Floating elements background */
+    .floating-item {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatUp 7s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) rotate(0deg) scale(0.8);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* Card styling */
+    .hk-card {
+      background: var(--hk-card-bg);
+      border: 4px solid var(--hk-primary-pink);
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(255, 71, 126, 0.2), inset 0 0 15px rgba(255, 238, 242, 0.8);
+      position: relative;
+    }
+
+    .title-heading {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    /* Restricted button arena box */
+    .btn-arena {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      overflow: hidden; /* Ensures NO button never visually overflows */
+      border-radius: 16px;
+      background: rgba(255, 238, 242, 0.4);
+      border: 2px dashed var(--hk-border-pink);
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, var(--hk-soft-red), var(--hk-red));
+      color: white;
+      font-family: 'Fredoka', sans-serif;
+      box-shadow: 0 4px 12px rgba(255, 10, 84, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-yes:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 18px rgba(255, 10, 84, 0.45);
+    }
+
+    .btn-no {
+      background: #ffffff;
+      color: var(--hk-dark-pink);
+      border: 2.5px solid var(--hk-primary-pink);
+      font-family: 'Fredoka', sans-serif;
+      box-shadow: 0 3px 8px rgba(255, 133, 161, 0.25);
+      position: absolute;
+      transition: left 0.2s ease-out, top 0.2s ease-out;
+      will-change: left, top;
+    }
+
+    /* Success Modal Overlay */
+    .success-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 238, 242, 0.94);
+      backdrop-filter: blur(4px);
+      z-index: 50;
+    }
+
+    .success-modal.active {
+      display: flex;
+      animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes modalPop {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+  <!-- Floating Bows & Hearts Container -->
+  <div id="floating-bg-container"></div>
+
+  <!-- Main Card Component -->
+  <main class="w-full max-w-sm hk-card p-5 sm:p-6 text-center z-10 my-auto">
+    
+    <!-- Titlebar / Header -->
+    <header class="bg-[#ffe5ec] border-2 border-[#ffb3c1] rounded-2xl p-2.5 mb-5 flex justify-between items-center shadow-inner">
+      <div class="flex items-center gap-2">
+        <!-- Cute SVG Hello Kitty Bow -->
+        <svg class="w-6 h-6 text-[#ff0a54] drop-shadow" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M50 42 C 43 30, 20 28, 18 48 C 16 62, 38 68, 48 56 C 49 55, 50 54, 50 54 C 50 54, 51 55, 52 56 C 62 68, 84 62, 82 48 C 80 28, 57 30, 50 42 Z"/>
+          <circle cx="50" cy="50" r="10" fill="#ff0a54"/>
+          <circle cx="47" cy="48" r="3" fill="#ffffff"/>
+        </svg>
+        <h1 class="title-heading text-base font-bold text-[#c9184a] tracking-wide">For pretty RC</h1>
+      </div>
+
+      <!-- Window Decorative Action Buttons -->
+      <div class="flex items-center gap-1.5">
+        <span class="w-3.5 h-3.5 rounded-full bg-[#ffb703] border border-white inline-block"></span>
+        <span class="w-3.5 h-3.5 rounded-full bg-[#ff477e] border border-white inline-block"></span>
+      </div>
+    </header>
+
+    <!-- Card Content Box -->
+    <section class="flex flex-col items-center">
+      <!-- Top Bow Decoration -->
+      <div class="text-[#ff477e] mb-1 text-sm font-semibold tracking-widest flex items-center gap-2">
+        <span>🎀</span>
+        <span>SPECIAL FOR YOU</span>
+        <span>🎀</span>
+      </div>
+
+      <h2 class="title-heading text-xl sm:text-2xl font-bold text-[#ff0a54] my-2 leading-snug">
+        Will you be my Valentine? 💖
+      </h2>
+      
+      <p class="text-xs text-gray-600 font-semibold mb-3">
+        (pindot or kiss? 😼)
+      </p>
+
+      <!-- Hello Kitty SVG Vector Art holding a red heart -->
+      <div class="my-2 relative group cursor-pointer">
+        <svg class="w-36 h-36 mx-auto drop-shadow-md transition-transform duration-300 group-hover:scale-105" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hello Kitty Head -->
+          <ellipse cx="100" cy="90" rx="65" ry="50" fill="white" stroke="#222222" stroke-width="6"/>
+          <!-- Left Ear -->
+          <path d="M48 55 Q 35 20 68 44 Z" fill="white" stroke="#222222" stroke-width="6" stroke-linejoin="round"/>
+          <!-- Right Ear -->
+          <path d="M152 55 Q 165 20 132 44 Z" fill="white" stroke="#222222" stroke-width="6" stroke-linejoin="round"/>
+          
+          <!-- Iconic Red Bow on Right Ear -->
+          <g transform="translate(130, 32) rotate(15)">
+            <ellipse cx="-18" cy="0" rx="14" ry="10" fill="#ff0a54" stroke="#222222" stroke-width="4"/>
+            <ellipse cx="18" cy="0" rx="14" ry="10" fill="#ff0a54" stroke="#222222" stroke-width="4"/>
+            <circle cx="0" cy="0" r="9" fill="#ff0a54" stroke="#222222" stroke-width="4"/>
+            <circle cx="-3" cy="-3" r="2.5" fill="white"/>
+          </g>
+
+          <!-- Eyes -->
+          <ellipse cx="70" cy="92" rx="5" ry="8" fill="#222222"/>
+          <ellipse cx="130" cy="92" rx="5" ry="8" fill="#222222"/>
+          <ellipse cx="68" cy="89" rx="1.5" ry="2.5" fill="white"/>
+          <ellipse cx="128" cy="89" rx="1.5" ry="2.5" fill="white"/>
+
+          <!-- Nose -->
+          <ellipse cx="100" cy="98" rx="6" ry="4.5" fill="#ffb703" stroke="#222222" stroke-width="3"/>
+
+          <!-- Whiskers -->
+          <!-- Left Whiskers -->
+          <line x1="32" y1="86" x2="52" y2="90" stroke="#222222" stroke-width="4" stroke-linecap="round"/>
+          <line x1="30" y1="96" x2="51" y2="96" stroke="#222222" stroke-width="4" stroke-linecap="round"/>
+          <line x1="34" y1="106" x2="53" y2="102" stroke="#222222" stroke-width="4" stroke-linecap="round"/>
+          <!-- Right Whiskers -->
+          <line x1="168" y1="86" x2="148" y2="90" stroke="#222222" stroke-width="4" stroke-linecap="round"/>
+          <line x1="170" y1="96" x2="149" y2="96" stroke="#222222" stroke-width="4" stroke-linecap="round"/>
+          <line x1="166" y1="106" x2="147" y2="102" stroke="#222222" stroke-width="4" stroke-linecap="round"/>
+
+          <!-- Body -->
+          <path d="M68 135 Q 100 130 132 135 L 142 180 Q 100 185 58 180 Z" fill="#ff758f" stroke="#222222" stroke-width="5" stroke-linejoin="round"/>
+          
+          <!-- Cute Big Heart Held by Kitty -->
+          <path d="M100 138 C 100 138, 80 115, 65 130 C 50 145, 75 168, 100 182 C 125 168, 150 145, 135 130 C 120 115, 100 138, 100 138 Z" fill="#ff0a54" stroke="#222222" stroke-width="4" stroke-linejoin="round"/>
+          <!-- Heart highlight -->
+          <path d="M72 132 Q 80 125 88 135" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Interactive Arena Box for Buttons -->
+      <div id="btnArena" class="btn-arena mt-3 p-2 flex items-center justify-center">
+        <!-- YES Button -->
+        <button id="yesBtn" class="btn-yes px-7 py-3 rounded-2xl font-bold text-sm tracking-wide uppercase cursor-pointer z-20">
+          YES 💕
+        </button>
+
+        <!-- NO Button (Restricted strictly inside #btnArena) -->
+        <button id="noBtn" class="btn-no px-6 py-2.5 rounded-2xl font-bold text-xs uppercase cursor-pointer">
+          NO 🥺
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Success Popup Modal -->
+  <div id="successModal" class="success-modal flex-col items-center justify-center p-5 text-center">
+    <div class="w-full max-w-sm hk-card p-6 sm:p-8 flex flex-col items-center shadow-2xl relative">
+      <!-- Modal Top Bow Icon -->
+      <div class="w-16 h-16 bg-[#ffe5ec] rounded-full border-2 border-[#ff85a1] flex items-center justify-center mb-4 shadow-sm">
+        <span class="text-3xl">🎀</span>
+      </div>
+
+      <h3 class="title-heading text-2xl font-extrabold text-[#ff0a54] mb-3">
+        YAY! 🎉✨
+      </h3>
+
+      <!-- Requested exact message output -->
+      <div class="bg-[#fff0f3] border-2 border-dashed border-[#ff85a1] p-4 rounded-2xl my-2 text-[#c9184a] font-bold text-base leading-relaxed shadow-sm">
+        "YAY! now, kailangan mo na ako spoil ng cute and pretty photos"
+      </div>
+
+      <p class="text-xs text-gray-500 font-semibold mt-3">
+        CHAT MO NA SI VINCE, RC! ❤️
+      </p>
+
+      <!-- Replay Button -->
+      <button onclick="location.reload()" class="mt-5 btn-yes px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider">
+        Send Again 💕
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. Generate Floating Background Items (Bows and Hearts) ---
+    const bgContainer = document.getElementById('floating-bg-container');
+    const items = ['🎀', '💖', '💕', '💗', '🌸', '✨'];
+
+    for (let i = 0; i < 22; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating-item';
+      el.innerText = items[Math.floor(Math.random() * items.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (Math.random() * 4 + 5) + 's';
+      el.style.animationDelay = (Math.random() * 5) + 's';
+      el.style.fontSize = (Math.random() * 14 + 14) + 'px';
+      bgContainer.appendChild(el);
+    }
+
+    // --- 2. Restricted "NO" Button Fleeing Logic ---
+    const noBtn = document.getElementById('noBtn');
+    const arena = document.getElementById('btnArena');
+    const yesBtn = document.getElementById('yesBtn');
+    const successModal = document.getElementById('successModal');
+
+    // Initial positioning of NO button next to YES inside arena
+    function initNoButtonPos() {
+      const arenaRect = arena.getBoundingClientRect();
+      const yesRect = yesBtn.getBoundingClientRect();
+      const noRect = noBtn.getBoundingClientRect();
+
+      // Place NO button to the right of YES button initially with some padding
+      let initialLeft = (yesRect.right - arenaRect.left) + 16;
+      let initialTop = (yesRect.top - arenaRect.top) + (yesRect.height / 2 - noRect.height / 2);
+
+      // Clamp to arena bounds
+      const maxLeft = arenaRect.width - noRect.width - 8;
+      if (initialLeft > maxLeft) initialLeft = maxLeft;
+
+      noBtn.style.left = `${initialLeft}px`;
+      noBtn.style.top = `${initialTop}px`;
+    }
+
+    // Move NO button away randomly STRICTLY within #btnArena boundaries
+    function moveNoBtn() {
+      const arenaRect = arena.getBoundingClientRect();
+      const noRect = noBtn.getBoundingClientRect();
+
+      // Calculate max allowed coordinates within arena (leaving 6px padding)
+      const padding = 6;
+      const maxX = arenaRect.width - noRect.width - padding;
+      const maxY = arenaRect.height - noRect.height - padding;
+
+      // Pick random coordinates within bounds [padding, max]
+      const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+    }
+
+    // Trigger flee on mouse hover or touch start
+    noBtn.addEventListener('mouseenter', moveNoBtn);
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevents tapping on mobile
+      moveNoBtn();
+    });
+
+    // --- 3. YES Button / Success Modal Logic ---
+    yesBtn.addEventListener('click', () => {
+      successModal.classList.add('active');
+    });
+
+    // Run setup on load & resize
+    window.addEventListener('load', initNoButtonPos);
+    window.addEventListener('resize', initNoButtonPos);
+  </script>
+</body>
+</html>
